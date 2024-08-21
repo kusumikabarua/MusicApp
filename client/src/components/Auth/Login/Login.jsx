@@ -7,6 +7,7 @@ import {
   MDBCard,
   MDBCardBody,
   MDBInput,
+  MDBSpinner,
  
 } from "mdb-react-ui-kit";
 import axios from "axios";
@@ -41,7 +42,7 @@ function Login() {
       };
       const res = await axios.post(`${API_BASE_URL}/auth/login`, data);
 
-      if (res.status == 200) {
+      if (res.status === 200) {
         enqueueSnackbar("User logged in successfully", { variant: "success" });
         localStorage.setItem("token", res?.data?.token);
         navigate("/");
@@ -98,7 +99,19 @@ function Login() {
                 size="lg"
                 onClick={loginUser}
               >
-                Login
+                 {isLoading ? (
+                  <>
+                    <MDBSpinner
+                      size="sm"
+                      role="status"
+                      tag="span"
+                      className="me-2"
+                    />
+                    Loading...
+                  </>
+                ) : (
+                  "Login"
+                )}
               </MDBBtn>
 
               <div>

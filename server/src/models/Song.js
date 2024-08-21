@@ -9,18 +9,6 @@ const SongSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    album: {
-      type: String,
-    },
-    artist: {
-      type: String,
-    },
-    language: {
-      type: String,
-    },
-    category: {
-      type: String,
-    },
   },
   { timestamps: true }
 );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ import {
   MDBCard,
   MDBCardBody,
   MDBInput,
-  MDBIcon,
+  
   MDBSpinner,
 } from "mdb-react-ui-kit";
 import "./Register.css";
@@ -52,7 +52,7 @@ function Register() {
       };
       const res = await axios.post(`${API_BASE_URL}/auth/register`, data);
 
-      if (res.status == 201)
+      if (res.status === 201)
         enqueueSnackbar("User registered successfully", { variant: "success" });
       navigate("/login");
     } catch (error) {

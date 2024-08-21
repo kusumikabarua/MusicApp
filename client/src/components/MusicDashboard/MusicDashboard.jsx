@@ -9,13 +9,34 @@ import {
 } from "mdb-react-ui-kit";
 import styles from "./MusicDashboard.module.css";
 import { API_BASE_URL } from "../../config";
+import Card from "../Card/Card";
 
 export default function MusicDashboard() {
- 
+  const [songs, setSongs] = useState([]);
  
 
   const isLoggedIn = localStorage.getItem("token") ? true : false;
+  useEffect(() => {
+    fetchSongs();
+  }, []);
 
+  const fetchSongs = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(`${API_BASE_URL}/getAllSongs`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) throw new Error("Network response was not ok.");
+      const data = await response.json();
+      setSongs(data);
+    } catch (error) {
+      console.error("Failed to fetch tasks:", error);
+    }
+  };
   return (
     <section className={styles.gradient}>
       <MDBContainer className="py-5 h-100">
@@ -57,9 +78,11 @@ export default function MusicDashboard() {
                   </div>
                 )}
 
-                {isLoggedIn}
-
-               
+                {isLoggedIn && songs && (<div className={styles.wrapper}>
+              {songs.map((item) => {
+                return <Card title={item.title} songUrl={item.songUrl} />;
+              })}
+            </div>)}   
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
