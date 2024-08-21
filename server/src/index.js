@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use("/api/auth",authRoutes);
 app.use("/api/playlist",playlistRoutes);
-app.use("/api",playlistRoutes);
+app.use("/api",songRoutes);
 
 mongoose
   .connect(process.env.MONGODB_URI)
