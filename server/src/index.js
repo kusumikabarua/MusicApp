@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 4000;
+const playlistRoutes = require("./routes/playlistRoutes");
+const songRoutes = require("./routes/songRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 const cors =require("cors");
@@ -11,6 +13,8 @@ app.use(express.json());
 
 
 app.use("/api/auth",authRoutes);
+app.use("/api/playlist",playlistRoutes);
+app.use("/api",playlistRoutes);
 
 mongoose
   .connect(process.env.MONGODB_URI)
