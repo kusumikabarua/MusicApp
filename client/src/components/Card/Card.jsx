@@ -8,10 +8,10 @@ import {
   MDBBtn
 } from 'mdb-react-ui-kit';
 
-export default function Card({title,songUrl}) {
+export default function Card({title}) {
   return (
-    <MDBCard>
-      <MDBCardImage src={songUrl} position='top' alt='...' />
+    <MDBCard style={{ width: '12rem' }}>
+      <MDBCardImage src={require('../../assets/images/music.png')}  position='top' alt='...' />
       <MDBCardBody>
         <MDBCardTitle>{title}</MDBCardTitle>
         

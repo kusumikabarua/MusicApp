@@ -10,7 +10,7 @@ const saveSong = async (songData) => {
 };
 const getAllSongs = async () => {
   try {
-    let songs = await Playlist.find();
+    let songs = await Song.find();
     return songs;
   } catch (error) {
     throw error;

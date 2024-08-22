@@ -1,13 +1,11 @@
 const songService = require("../services/songService");
 const saveSong = async (req, res) => {
   try {
-    const { title, description } = req.body;
-    const userId = req.user.id;
-    console.log("userId", userId);
+    const { title, songUrl } = req.body;
+   
     const song = await songService.saveSong({
       title,
-      description,
-      userId,
+      songUrl,
     });
     return res.status(201).json(song);
   } catch (error) {
