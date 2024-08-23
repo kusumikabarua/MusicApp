@@ -10,6 +10,7 @@ import {
 import styles from "./MusicDashboard.module.css";
 import { API_BASE_URL } from "../../config";
 import Card from "../Card/Card";
+import Main from "../Player/Main";
 
 export default function MusicDashboard() {
   const [songs, setSongs] = useState([]);
@@ -32,7 +33,10 @@ export default function MusicDashboard() {
       });
       if (!response.ok) throw new Error("Network response was not ok.");
       const data = await response.json();
-      setSongs(data);
+     const songsData = data.map((item)=>{
+      return{ id: item._id,title:item.title,songUrl:item.songUrl,active : 'false'}
+     })
+      setSongs(songsData);
     } catch (error) {
       console.error("Failed to fetch tasks:", error);
     }
@@ -78,12 +82,13 @@ export default function MusicDashboard() {
                   </div>
                 )}
 
-                {isLoggedIn && songs && (<div className={styles.wrapper}>
+                {/* {isLoggedIn && songs && (<div className={styles.wrapper}>
               {songs.map((item) => {
                 return <Card title={item.title} songUrl={item.songUrl} />;
               })}
-            </div>)}   
+            </div>)}    */}
               </MDBCardBody>
+              {isLoggedIn &&songs.length!==0 && <Main songsFromDB={songs} />}
             </MDBCard>
           </MDBCol>
         </MDBRow>
